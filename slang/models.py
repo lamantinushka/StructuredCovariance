@@ -124,9 +124,8 @@ class LogisticRegressionFull(object):
 
 class MNISTBnn(nn.Module):
   
-    def __init__(self, hidden_size = 10, max_rank = 8):
+    def __init__(self, inp_dim = 14, hidden_size = 10, max_rank = 8):
         super(MNISTBnn, self).__init__()
-        inp_dim = 14
         self.max_rank = max_rank
         self.out_dim = 2
         self.shapes = [(inp_dim + 1, hidden_size), 
