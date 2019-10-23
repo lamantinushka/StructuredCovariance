@@ -59,7 +59,7 @@ losses = []
 test_nlls = []
 final_nlls = []
 for rank in params["max_ranks"]:
-    model = MNISTBnn(max_rank = rank, hidden_size = params["hidden_size"])
+    model = MNISTBnn(inp_dim = X.shape[1], max_rank = rank, hidden_size = params["hidden_size"])
     l, tl = train(model, X, y_ohe, params, X_test = X_test, y_test = y_test)
     losses.append(l)
     test_nlls.append(tl)
