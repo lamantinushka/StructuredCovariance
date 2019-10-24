@@ -24,7 +24,7 @@ def make_optimization_step(model, x, y, params, alpha = None, beta = None):
         delta_d[delta_d < 0] = 0
         model.U = torch.nn.Parameter(V)
         model.d = torch.nn.Parameter(beta*lmbd + delta*model.d + delta_d)
-        cum_grads = model.grads.sum(dim = 0) + lmbd*model.mu
+        cum_grads = model.grads.mean(dim = 0)*params["N"] + lmbd*model.mu
         delta_mu = fast_inverse(cum_grads.view(-1, 1), model.U, model.d)
         model.mu = torch.nn.Parameter(model.mu - alpha*delta_mu)
     elif isinstance(model, LogisticRegressionFull):
