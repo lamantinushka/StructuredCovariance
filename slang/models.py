@@ -124,10 +124,10 @@ class LogisticRegressionFull(object):
 
 class MNISTBnn(nn.Module):
   
-    def __init__(self, inp_dim = 14, hidden_size = 10, max_rank = 8):
+    def __init__(self, inp_dim = 14, hidden_size = 10, out_dim = 2, max_rank = 8):
         super(MNISTBnn, self).__init__()
         self.max_rank = max_rank
-        self.out_dim = 2
+        self.out_dim = out_dim
         self.shapes = [(inp_dim + 1, hidden_size), 
                        (hidden_size + 1, hidden_size),
                        (hidden_size + 1, self.out_dim)]
@@ -139,7 +139,7 @@ class MNISTBnn(nn.Module):
         
         size = sum(self.sizes)
         
-        self.mu = torch.nn.Parameter(torch.zeros(size))
+        self.mu = torch.nn.Parameter(torch.randn(size)/100)
         self.U = torch.nn.Parameter(torch.randn(size, max_rank))
         self.d = torch.nn.Parameter(torch.ones(size))
         self.w = None
